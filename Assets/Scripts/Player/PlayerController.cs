@@ -93,13 +93,13 @@ public class PlayerController : MonoBehaviour
 
         if (moveDir.x < 0)
         {
-            render.flipX = true;
+            
             animator.SetBool("Run", true);
 
         }
         else if (moveDir.x > 0)
         {
-            render.flipX = false;
+            
             animator.SetBool("Run", true);
         }
         else
