@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Rigidbody2D rigid;
     [SerializeField] SpriteRenderer render;
     [SerializeField] Animator animator;
-     
+    [SerializeField] Transform tf;
 
     [Header("Property")]
     [SerializeField] float movePower;
@@ -23,12 +23,34 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveDir;
     private bool isGround;
 
-    
-
-
+ 
     private void FixedUpdate()
     {
         Move();
+    }
+
+    
+
+    void Start()
+    {
+        tf = transform;
+    }
+
+    
+    void Update()
+    {
+        Vector2 mousePos = Input.mousePosition;
+
+        Vector3 target = Camera.main.ScreenToWorldPoint(mousePos);
+
+        if (target.x < tf.position.x)
+        {
+            tf.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            tf.localScale = new Vector3(1, 1, 1);
+        }
     }
 
     private void Move()
@@ -114,4 +136,5 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("IsGround", isGround);
         }
     }
+
 }

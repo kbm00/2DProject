@@ -41,10 +41,10 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: New Layer 1
+  - name: BackGround
     uniqueID: 2261160091
     locked: 0
-  - name: New Layer 2
+  - name: Ground
     uniqueID: 3949781163
     locked: 0
   - name: New Layer 3
