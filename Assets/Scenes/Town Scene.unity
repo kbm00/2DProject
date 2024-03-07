@@ -527,7 +527,7 @@ Transform:
   m_GameObject: {fileID: 1227095278}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0028, y: -0.7511, z: 0}
+  m_LocalPosition: {x: 0.0028, y: -0.98, z: 0}
   m_LocalScale: {x: 1.2507823, y: 0.42620352, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -747,8 +747,8 @@ MonoBehaviour:
   maxYSpeed: 20
   brakePower: 5
   jumpSpeed: 10
-  dashSpeed: 1.6
-  dashTime: 0.3
+  dashSpeed: 1.3
+  dashTime: 0.2
   groundCheckLayer:
     serializedVersion: 2
     m_Bits: 136
@@ -1503,7 +1503,7 @@ PlatformEffector2D:
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 220
+  m_SurfaceArc: 140
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1

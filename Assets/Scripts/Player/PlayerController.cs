@@ -71,10 +71,8 @@ public class PlayerController : MonoBehaviour
         {
             angle -= 180f;
         }
-
         weaponPoint.rotation = Quaternion.Euler(0, 0, angle);
     }
-
 
     private void Move()
     {
@@ -138,13 +136,10 @@ public class PlayerController : MonoBehaviour
 
         if (moveDir.x < 0)
         {
-
             animator.SetBool("Run", true);
-
         }
         else if (moveDir.x > 0)
         {
-
             animator.SetBool("Run", true);
         }
         else
