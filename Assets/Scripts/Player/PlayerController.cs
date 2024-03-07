@@ -8,8 +8,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Rigidbody2D rigid;
     [SerializeField] SpriteRenderer render;
     [SerializeField] Animator animator;
-    [SerializeField] Transform tf;
     [SerializeField] Collider2D playerCollider;
+    [SerializeField] Transform tf;
+    [SerializeField] Transform weaponPoint;
 
     [Header("Property")]
     [SerializeField] float movePower;
@@ -20,7 +21,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float dashSpeed;
     [SerializeField] float dashTime;
     [SerializeField] LayerMask groundCheckLayer;
-    
 
     private int groundCount;
     private Vector2 moveDir;
@@ -28,35 +28,53 @@ public class PlayerController : MonoBehaviour
     private bool isDashing;
     private float dashTimeLeft;
 
-
     private void FixedUpdate()
     {
         Move();
     }
-
-
 
     void Start()
     {
         tf = transform;
     }
 
-
     void Update()
     {
-        Vector2 mousePos = Input.mousePosition;
+        PlayerFlip();
+        WeaponRotate();
+    }
 
-        Vector3 target = Camera.main.ScreenToWorldPoint(mousePos);
+    private void PlayerFlip()
+    {
+        Vector3 mousePos = Input.mousePosition;
+
+        Vector2 target = Camera.main.ScreenToWorldPoint(mousePos);
 
         if (target.x < tf.position.x)
         {
-            tf.localScale = new Vector3(-1, 1, 1);
+            tf.localScale = new Vector2(-1, 1);
         }
         else
         {
-            tf.localScale = new Vector3(1, 1, 1);
+            tf.localScale = new Vector2(1, 1);
         }
     }
+    private void WeaponRotate()
+    {
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorldPosition.z = 0;
+
+        Vector2 direction = mouseWorldPosition - weaponPoint.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        if (tf.localScale.x < 0)
+        {
+            angle -= 180f;
+        }
+
+        weaponPoint.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
 
     private void Move()
     {
@@ -85,7 +103,6 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
     private void Jump()
     {
         Vector2 velocity = rigid.velocity;
@@ -98,9 +115,6 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(Dashing());
     }
 
-
-
-
     private IEnumerator Dashing()
     {
 
@@ -110,11 +124,11 @@ public class PlayerController : MonoBehaviour
         isDashing = true;
         dashTimeLeft = dashTime;
         rigid.velocity = dashDirection * dashSpeed * movePower;
-          
+
         playerCollider.enabled = false;
         yield return new WaitForSeconds(dashTime);
         playerCollider.enabled = true;
-       
+
         isDashing = false;
 
     }
@@ -155,6 +169,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnAttack(InputValue value)
+    {
+
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -175,5 +194,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("IsGround", isGround);
         }
     }
+
+
 
 }
