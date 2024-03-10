@@ -660,6 +660,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1465279707}
   - component: {fileID: 1465279706}
+  - component: {fileID: 1465279713}
   - component: {fileID: 1465279710}
   - component: {fileID: 1465279708}
   - component: {fileID: 1465279709}
@@ -773,8 +774,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.010899723}
-  m_Size: {x: 1.3125, y: 1.8080851}
+  m_Offset: {x: 0.008346081, y: -0.03285587}
+  m_Size: {x: 0.8731041, y: 1.6104786}
   m_Direction: 0
 --- !u!114 &1465279709
 MonoBehaviour:
@@ -823,10 +824,9 @@ MonoBehaviour:
   animator: {fileID: 1465279711}
   playerCollider: {fileID: 1465279708}
   tf: {fileID: 1465279707}
-  weaponPoint: {fileID: 1109071807}
-  movePower: 15
-  maxXSpeed: 15
-  maxYSpeed: 15
+  movePower: 20
+  maxXSpeed: 20
+  maxYSpeed: 20
   brakePower: 5
   jumpSpeed: 10
   dashSpeed: 1.3
@@ -882,6 +882,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1465279713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465279705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da8e7f97d1213ef45a6b1cec94afb251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerTransform: {fileID: 1465279707}
+  weaponPoint: {fileID: 1109071807}
 --- !u!1 &1497383658
 GameObject:
   m_ObjectHideFlags: 0

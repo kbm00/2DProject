@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] Collider2D playerCollider;
     [SerializeField] Transform tf;
-    [SerializeField] Transform weaponPoint;
+   
 
     [Header("Property")]
     [SerializeField] float movePower;
@@ -36,42 +36,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         tf = transform;
-    }
-
-    void Update()
-    {
-        PlayerFlip();
-        WeaponRotate();
-    }
-
-    private void PlayerFlip()
-    {
-        Vector3 mousePos = Input.mousePosition;
-
-        Vector2 target = Camera.main.ScreenToWorldPoint(mousePos);
-
-        if (target.x < tf.position.x)
-        {
-            tf.localScale = new Vector2(-1, 1);
-        }
-        else
-        {
-            tf.localScale = new Vector2(1, 1);
-        }
-    }
-    private void WeaponRotate()
-    {
-        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mouseWorldPosition.z = 0;
-
-        Vector2 direction = mouseWorldPosition - weaponPoint.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        if (tf.localScale.x < 0)
-        {
-            angle -= 180f;
-        }
-        weaponPoint.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     private void Move()
@@ -108,7 +72,7 @@ public class PlayerController : MonoBehaviour
         rigid.velocity = velocity;
     }
 
-    private void Dash()
+    private void Dash() //플레이어 대시 구현
     {
         StartCoroutine(Dashing());
     }
@@ -169,7 +133,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (groundCheckLayer.Contain(collision.gameObject.layer))
@@ -189,7 +152,4 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("IsGround", isGround);
         }
     }
-
-
-
 }
