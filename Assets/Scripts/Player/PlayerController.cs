@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("Effect")]
+   
     
 
 
@@ -14,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] Collider2D playerCollider;
     [SerializeField] Transform tf;
-   
+    
 
     [Header("PlayerState")]
     [SerializeField] float movePower;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float jumpSpeed;
     [SerializeField] float dashSpeed;
     [SerializeField] float dashTime;
+    
 
     [Header("Check")]
     [SerializeField] LayerMask groundCheckLayer;
@@ -71,10 +73,11 @@ public class PlayerController : MonoBehaviour
             Vector2 velocity = rigid.velocity;
             velocity.y = -maxYSpeed;
             rigid.velocity = velocity;
+           
         } 
 
     }
-
+    
   
    private void Slope()
     {
@@ -82,7 +85,7 @@ public class PlayerController : MonoBehaviour
         if (hit)
         {
             float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
-            if (slopeAngle > 0 && slopeAngle < 60) // 경사도가 0보다 크고 60도 미만인 경우
+            if (slopeAngle > 0 && slopeAngle < 60) // 경사면 각도가 0보다 크고 60도 미만인 경우
             {
                 // 경사면에 따라 힘 조정
                 Vector2 adjustedForce = Vector2.up * Mathf.Tan(slopeAngle * Mathf.Deg2Rad) * Mathf.Abs(moveDir.x) * movePower;
@@ -155,11 +158,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnAttack(InputValue value)
-    {
-
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (groundCheckLayer.Contain(collision.gameObject.layer))
@@ -179,4 +177,6 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("IsGround", isGround);
         }
     }
+
+   
 }
