@@ -4,6 +4,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Effect")]
+    
+
+
     [Header("Component")]
     [SerializeField] Rigidbody2D rigid;
     [SerializeField] SpriteRenderer render;
@@ -12,7 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform tf;
    
 
-    [Header("Property")]
+    [Header("PlayerState")]
     [SerializeField] float movePower;
     [SerializeField] float maxXSpeed;
     [SerializeField] float maxYSpeed;
@@ -20,6 +24,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float jumpSpeed;
     [SerializeField] float dashSpeed;
     [SerializeField] float dashTime;
+
+    [Header("Check")]
     [SerializeField] LayerMask groundCheckLayer;
 
     private int groundCount;
@@ -31,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+        Slope();
     }
 
     void Start()
@@ -40,6 +47,8 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
+        Slope();
+
         if (moveDir.x < 0 && rigid.velocity.x > -maxXSpeed)
         {
             rigid.AddForce(Vector2.right * moveDir.x * movePower);
@@ -62,9 +71,27 @@ public class PlayerController : MonoBehaviour
             Vector2 velocity = rigid.velocity;
             velocity.y = -maxYSpeed;
             rigid.velocity = velocity;
-        }
+        } 
 
     }
+
+  
+   private void Slope()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.5f, groundCheckLayer);
+        if (hit)
+        {
+            float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
+            if (slopeAngle > 0 && slopeAngle < 60) // 경사도가 0보다 크고 60도 미만인 경우
+            {
+                // 경사면에 따라 힘 조정
+                Vector2 adjustedForce = Vector2.up * Mathf.Tan(slopeAngle * Mathf.Deg2Rad) * Mathf.Abs(moveDir.x) * movePower;
+                rigid.AddForce(adjustedForce);
+            }
+        }
+    }
+
+
     private void Jump()
     {
         Vector2 velocity = rigid.velocity;
@@ -72,7 +99,7 @@ public class PlayerController : MonoBehaviour
         rigid.velocity = velocity;
     }
 
-    private void Dash() //플레이어 대시 구현
+    private void Dash() 
     {
         StartCoroutine(Dashing());
     }
