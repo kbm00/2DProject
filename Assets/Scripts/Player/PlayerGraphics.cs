@@ -1,22 +1,22 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerGraphics : MonoBehaviour
 {
-   
+    
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform weaponPoint;
     [SerializeField] private Transform firePoint;
     [SerializeField] private float bulletSpeed;
-    
+
 
     [Header("Prefabs")]
     [SerializeField] GameObject bulletPrefab;
-    
 
     void Update()
     {
-        
+
 
         PlayerFlip();
         WeaponRotate();
@@ -52,7 +52,7 @@ public class PlayerGraphics : MonoBehaviour
 
     private void Fire()
     {
-       
+
 
         GameObject projectile = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
@@ -87,16 +87,20 @@ public class PlayerGraphics : MonoBehaviour
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
 
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0; // Z축 값은 무시합니다.
+        mousePosition.z = 0; // Z축 값은 무시
 
         Vector2 fireDirection = mousePosition - firePoint.position;
         float fireAngle = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
 
-        // 발사체의 회전을 설정합니다. playerTransform의 반전 상태에 상관없이 작동합니다.
+        // 발사체의 회전을 설정 playerTransform의 반전 상태에 상관없이 작동
         projectile.transform.rotation = Quaternion.Euler(0, 0, fireAngle);
 
-        // 발사체가 마우스를 향해 정확히 날아가도록 속도를 설정합니다.
+        // 발사체가 마우스를 향해 정확히 날아가도록 속도를 설정
         rb.velocity = fireDirection.normalized * bulletSpeed;
+
     }
+
+
+
 }
 
