@@ -78,7 +78,6 @@ public class PlayerController : MonoBehaviour
 
     }
     
-  
    private void Slope()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.5f, groundCheckLayer);
@@ -93,7 +92,6 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
 
     private void Jump()
     {
