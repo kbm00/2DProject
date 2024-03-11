@@ -1037,12 +1037,12 @@ MonoBehaviour:
   animator: {fileID: 1465279711}
   playerCollider: {fileID: 1465279714}
   tf: {fileID: 1465279707}
-  movePower: 15
+  movePower: 12
   maxXSpeed: 20
-  maxYSpeed: 20
+  maxYSpeed: 15
   brakePower: 15
   jumpSpeed: 15
-  dashSpeed: 2.5
+  dashSpeed: 2
   dashTime: 0.2
   groundCheckLayer:
     serializedVersion: 2
@@ -1084,7 +1084,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: b7d7a5a2522823243b63e6aa84502c17, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1111,7 +1111,7 @@ MonoBehaviour:
   weaponPoint: {fileID: 1109071807}
   firePoint: {fileID: 1955104067}
   bulletSpeed: 50
-  bulletPrefab: {fileID: 2436793672446796526, guid: c7a0cc4d976d8384f8d170ca9e9a3818, type: 3}
+  bulletPrefab: {fileID: 6707236439326825048, guid: a29a2379e0110024ba59977ae94f3ba3, type: 3}
 --- !u!70 &1465279714
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

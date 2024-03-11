@@ -72,15 +72,13 @@ public class PlayerController : MonoBehaviour
         {
             Vector2 velocity = rigid.velocity;
             velocity.y = -maxYSpeed;
-            rigid.velocity = velocity;
-           
+            rigid.velocity = velocity; 
         } 
-
     }
     
    private void Slope()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.5f, groundCheckLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 3f, groundCheckLayer);
         if (hit)
         {
             float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
