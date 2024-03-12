@@ -51,8 +51,6 @@ public class SkellDog : Monster
         transform.Translate(movement);
         animator.SetBool("Run", true);
         
-
-
         if (Vector2.Distance(target.position, transform.position) > findRange)
         {
             currentState = SkellDState.Idle;
