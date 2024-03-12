@@ -10,14 +10,11 @@ public class PlayerGraphics : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private float bulletSpeed;
 
-
     [Header("Prefabs")]
     [SerializeField] GameObject bulletPrefab;
 
     void Update()
     {
-
-
         PlayerFlip();
         WeaponRotate();
     }
