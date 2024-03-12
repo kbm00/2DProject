@@ -17,8 +17,8 @@ TagManager:
   - Player
   - Tile
   - Passable
-  - 
-  - 
+  - Projectile
+  - Monster
   - 
   - 
   - 

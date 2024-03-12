@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour,IDamagable
 {
     [Header("Effect")]
    
@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float jumpSpeed;
     [SerializeField] float dashSpeed;
     [SerializeField] float dashTime;
+    [SerializeField] int hp;
     
 
     [Header("Check")]
@@ -173,6 +174,18 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("IsGround", isGround);
         }
     }
+    public void Die()
+    {
+        gameObject.SetActive(false);
+    }
 
-   
+    public void TakeDamage(int damage)
+    {
+        hp -= damage;
+        if (hp <= 0)
+        {
+            Die();
+        }
+    }
+
 }
