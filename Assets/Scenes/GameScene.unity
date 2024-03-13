@@ -1037,12 +1037,10 @@ MonoBehaviour:
   animator: {fileID: 1465279711}
   playerCollider: {fileID: 1465279714}
   tf: {fileID: 1465279707}
-  defaultMaterial: {fileID: 6200000, guid: 27fbe40d3b669ec4e9c1eeaf3f7a16de, type: 2}
-  sMaterial: {fileID: 6200000, guid: 0ba4d32281d87f241894d73067468b7c, type: 2}
-  movePower: 12
+  movePower: 10
   maxXSpeed: 15
-  maxYSpeed: 20
-  brakePower: 25
+  maxYSpeed: 15
+  brakePower: 30
   jumpSpeed: 15
   dashSpeed: 2.5
   dashTime: 0.2
@@ -1097,7 +1095,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 1465279705}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 0ba4d32281d87f241894d73067468b7c, type: 2}
+  m_Material: {fileID: 6200000, guid: 27fbe40d3b669ec4e9c1eeaf3f7a16de, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1137,7 +1135,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 1
-  m_AngularDrag: 0
+  m_AngularDrag: 0.2
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: b7d7a5a2522823243b63e6aa84502c17, type: 2}
   m_IncludeLayers:

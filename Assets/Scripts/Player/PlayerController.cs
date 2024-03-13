@@ -2,11 +2,10 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour,IDamagable
+public class PlayerController : MonoBehaviour, IDamagable
 {
     [Header("Effect")]
-   
-    
+
 
 
     [Header("Component")]
@@ -15,9 +14,6 @@ public class PlayerController : MonoBehaviour,IDamagable
     [SerializeField] Animator animator;
     [SerializeField] Collider2D playerCollider;
     [SerializeField] Transform tf;
-    [SerializeField] PhysicsMaterial2D defaultMaterial;
-    [SerializeField] PhysicsMaterial2D sMaterial;
-
 
     [Header("PlayerState")]
     [SerializeField] float movePower;
@@ -28,7 +24,7 @@ public class PlayerController : MonoBehaviour,IDamagable
     [SerializeField] float dashSpeed;
     [SerializeField] float dashTime;
     [SerializeField] int hp;
-    
+
 
     [Header("Check")]
     [SerializeField] LayerMask groundCheckLayer;
@@ -44,22 +40,22 @@ public class PlayerController : MonoBehaviour,IDamagable
         Move();
         
     }
-
     void Start()
     {
         tf = transform;
         playerCollider = GetComponent<Collider2D>();
+       
     }
 
     void Update()
     {
-        SlopeMaterial();
+       
     }
 
     private void Move()
     {
         float slopeAngles = Slope();
-        float slopeFactor = Mathf.Max(2, 1 + slopeAngles / 25f); // 경사 각도에 따라 이동 힘 보정
+        float slopeFactor = Mathf.Max(2, 1 + slopeAngles / 15f); // 경사 각도에 따라 이동 힘 보정
 
         Vector2 moveForce = moveDir * movePower * slopeFactor;
 
@@ -96,29 +92,11 @@ public class PlayerController : MonoBehaviour,IDamagable
         {
             Vector2 velocity = rigid.velocity;
             velocity.y = -maxYSpeed;
-            rigid.velocity = velocity; 
-        } 
-    }
-
-    private void SlopeMaterial()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 3f, groundCheckLayer);
-        if(hit.collider !=null)
-        {
-            float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
-            if(slopeAngle > 0 && slopeAngle <= 45 )
-            {
-                playerCollider.sharedMaterial = sMaterial;
-               
-            }
-            else
-            {
-                playerCollider.sharedMaterial = defaultMaterial;
-            }
+            rigid.velocity = velocity;
         }
-
     }
 
+    
     private float Slope()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.5f, groundCheckLayer);
@@ -129,23 +107,6 @@ public class PlayerController : MonoBehaviour,IDamagable
         return 0;
     }
 
-
-
-    /*private void Slope()
-     {
-         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 3f, groundCheckLayer);
-         if (hit)
-         {
-             float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
-             if (slopeAngle > 0 && slopeAngle < 60) // 경사면 각도가 0보다 크고 60도 미만인 경우
-             {
-                 // 경사면에 따라 힘 조정
-                 Vector2 adjustedForce = Vector2.up * Mathf.Tan(slopeAngle * Mathf.Deg2Rad) * Mathf.Abs(moveDir.x) * movePower;
-                 rigid.AddForce(adjustedForce);
-             }
-         }
-     }
-    */
     private void Jump()
     {
         Vector2 velocity = rigid.velocity;
