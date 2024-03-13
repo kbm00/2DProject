@@ -15,7 +15,7 @@ TagManager:
   - Water
   - UI
   - Player
-  - Tile
+  - ForeGround
   - Passable
   - Projectile
   - Monster

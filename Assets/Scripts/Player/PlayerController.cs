@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour, IDamagable
     [SerializeField] Animator animator;
     [SerializeField] Collider2D playerCollider;
     [SerializeField] Transform tf;
+    [SerializeField] PhysicsMaterial2D lowMaterial;
+    [SerializeField] PhysicsMaterial2D highMaterial;
 
     [Header("PlayerState")]
     [SerializeField] float movePower;
@@ -38,18 +40,18 @@ public class PlayerController : MonoBehaviour, IDamagable
     private void FixedUpdate()
     {
         Move();
-        
+        SlopeChecker();
+       
     }
     void Start()
     {
         tf = transform;
-        playerCollider = GetComponent<Collider2D>();
-       
+          
     }
 
     void Update()
     {
-       
+        
     }
 
     private void Move()
@@ -69,7 +71,6 @@ public class PlayerController : MonoBehaviour, IDamagable
         {
             rigid.AddForce(moveForce);
         }
-
 
         if (moveDir.x < 0 && rigid.velocity.x > -maxXSpeed)
         {
@@ -96,7 +97,37 @@ public class PlayerController : MonoBehaviour, IDamagable
         }
     }
 
-    
+    private bool CheckIfOnSlope()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 2f, groundCheckLayer);
+        if (hit.collider != null)
+        {
+            float angle = Vector2.Angle(hit.normal, Vector2.up);
+            if (angle > 0 && angle <= 50  ) // 경사면 감지
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void SlopeChecker()
+    {
+        bool isOnSlope = CheckIfOnSlope();
+        if (isOnSlope && Mathf.Approximately(rigid.velocity.x, 0f))
+        {
+            playerCollider.sharedMaterial = highMaterial;
+            Debug.Log("Check");
+        }
+        else
+        {
+            playerCollider.sharedMaterial = lowMaterial;
+        }
+
+         playerCollider.enabled = false;
+         playerCollider.enabled = true;
+    }
+
     private float Slope()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.5f, groundCheckLayer);

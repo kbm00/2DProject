@@ -1037,10 +1037,12 @@ MonoBehaviour:
   animator: {fileID: 1465279711}
   playerCollider: {fileID: 1465279714}
   tf: {fileID: 1465279707}
+  lowMaterial: {fileID: 6200000, guid: 27fbe40d3b669ec4e9c1eeaf3f7a16de, type: 2}
+  highMaterial: {fileID: 6200000, guid: 38e8df101beb0d14997264ea86720f1e, type: 2}
   movePower: 10
   maxXSpeed: 15
   maxYSpeed: 15
-  brakePower: 30
+  brakePower: 20
   jumpSpeed: 15
   dashSpeed: 2.5
   dashTime: 0.2
@@ -1524,7 +1526,7 @@ GameObject:
   - component: {fileID: 1755256791}
   - component: {fileID: 1755256792}
   m_Layer: 7
-  m_Name: Tile
+  m_Name: ForeGround
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1539,7 +1541,7 @@ Transform:
   m_GameObject: {fileID: 1755256785}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 7, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
