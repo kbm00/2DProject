@@ -14,7 +14,7 @@ public class RedBat : Monster
     [SerializeField] float attackDelay;
     [SerializeField] Animator animator;
 
-    private Coroutine attackRoutine;
+
     private Transform target;
     private Vector2 startPos;
 
@@ -47,7 +47,7 @@ public class RedBat : Monster
         if (Vector2.Distance(target.position, transform.position) < attackRange)
         {
             currentState = RedBatState.Attack;
-            attackRoutine = StartCoroutine(AttackRoutine());
+           
         }
 
     }
@@ -59,34 +59,13 @@ public class RedBat : Monster
         if (Vector2.Distance(target.position, transform.position) > attackRange)
         {
             currentState = RedBatState.Idle;
-            if (attackRoutine != null)
-            {
-                StopCoroutine(attackRoutine);
-                attackRoutine = null;
-            }
-            else
-            {
-                GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-                Vector2 attackDirection = (target.position - transform.position).normalized;
-                projectile.GetComponent<Projectile>().Launch(attackDirection, moveSpeed);
-            }
+            animator.SetBool("Attack", false);
+            return;
         }
-        
+
     }
 
-    private IEnumerator AttackRoutine()
-    {
-        while (currentState == RedBatState.Attack)
-        {
-            GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-            Vector2 attackDirection = (target.position - transform.position).normalized;
-            projectile.GetComponent<Projectile>().Launch(attackDirection, projectileSpeed);
-
-            yield return new WaitForSeconds(attackDelay);
-        }
-    }
-
-    /*public void FireProjectile()
+    public void FireProjectile()
     {
         if (target != null)
         {
@@ -94,6 +73,6 @@ public class RedBat : Monster
             Vector2 attackDirection = (target.position - transform.position).normalized;
             projectile.GetComponent<Projectile>().Launch(attackDirection, projectileSpeed);
         }
-    }*/
+    }
 
 }
