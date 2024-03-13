@@ -47,11 +47,13 @@ public class Bat : Monster
     {
         Vector2 dir = (target.position - transform.position).normalized;
         transform.Translate(dir * moveSpeed * Time.deltaTime, Space.World);
+        FlipDirection(dir.x);
 
         if (Vector2.Distance(target.position, transform.position) > findRange)
         {
             currentState = BatState.Idle;
         }
+
     }
 
 }

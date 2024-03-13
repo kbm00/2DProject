@@ -27,6 +27,7 @@ public class RedBat : Monster
 
     private void Update()
     {
+        FlipDirection(target.position.x - transform.position.x);
 
         switch (currentState)
         {
@@ -84,5 +85,15 @@ public class RedBat : Monster
             yield return new WaitForSeconds(attackDelay);
         }
     }
+
+    /*public void FireProjectile()
+    {
+        if (target != null)
+        {
+            GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+            Vector2 attackDirection = (target.position - transform.position).normalized;
+            projectile.GetComponent<Projectile>().Launch(attackDirection, projectileSpeed);
+        }
+    }*/
 
 }

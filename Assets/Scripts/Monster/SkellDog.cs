@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public enum SkellDState { Idle, Trace }
 
@@ -37,6 +38,7 @@ public class SkellDog : Monster
 
     private void SkellDIdleState()
     {
+       
         animator.SetBool("Run", false);
         if (Vector2.Distance(target.position, transform.position) < findRange)
         {
@@ -49,6 +51,7 @@ public class SkellDog : Monster
         float moveDirection = (target.position.x > transform.position.x) ? 1f : -1f;
         Vector2 movement = new Vector2(moveDirection * moveSpeed * Time.deltaTime, 0f);
         transform.Translate(movement);
+        FlipDirection(moveDirection);
         animator.SetBool("Run", true);
         
         if (Vector2.Distance(target.position, transform.position) > findRange)
