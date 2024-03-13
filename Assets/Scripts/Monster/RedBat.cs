@@ -12,6 +12,7 @@ public class RedBat : Monster
     [SerializeField] float projectileSpeed;
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] float attackDelay;
+    [SerializeField] Animator animator;
 
     private Coroutine attackRoutine;
     private Transform target;
@@ -41,6 +42,7 @@ public class RedBat : Monster
 
     private void RedBatIdleState()
     {
+        animator.SetBool("Attack", false);
         if (Vector2.Distance(target.position, transform.position) < attackRange)
         {
             currentState = RedBatState.Attack;
@@ -51,7 +53,7 @@ public class RedBat : Monster
 
     private void RedBatAttackState()
     {
-        
+        animator.SetBool("Attack", true);
 
         if (Vector2.Distance(target.position, transform.position) > attackRange)
         {
