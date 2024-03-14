@@ -1,23 +1,50 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerGraphics : MonoBehaviour
 {
-    
-    [SerializeField] private Transform playerTransform;
-    [SerializeField] private Transform weaponPoint;
-    [SerializeField] private Transform firePoint;
-    [SerializeField] private float bulletSpeed;
+    [SerializeField] private GameObject[] weapons;
+    [SerializeField] Transform playerTransform;
+    [SerializeField] Transform weaponPoint;
+    [SerializeField] Transform firePoint;
+    [SerializeField] float bulletSpeed;
 
     [Header("Prefabs")]
     [SerializeField] GameObject bulletPrefab;
+
+
+    private int currentWeaponIndex = 0;
 
     void Update()
     {
         PlayerFlip();
         WeaponRotate();
+        SwitchWeapon();
     }
+
+    private void SwitchWeapon()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) 
+        {
+            ActivateWeapon(0); // 첫 번째 무기 활성화
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2)) 
+        {
+            ActivateWeapon(1); // 두 번째 무기 활성화
+        }  
+    }
+
+    private void ActivateWeapon(int weaponIndex)
+    {
+        if (weaponIndex < weapons.Length)
+        {
+            weapons[currentWeaponIndex].SetActive(false); 
+            weapons[weaponIndex].SetActive(true); 
+            currentWeaponIndex = weaponIndex; 
+        }
+    }
+
+
 
     private void PlayerFlip() // 플레이어가 마우스 위치에 따라 좌우로 바라보도록 적용
     {

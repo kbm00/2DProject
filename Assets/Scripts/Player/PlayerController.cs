@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour, IDamagable
         // 경사면에서 수직 힘 추가
         if (slopeAngles > 0)
         {
-            moveForce += Vector2.up * Mathf.Abs(moveDir.x) * movePower * Mathf.Sin(slopeAngles * Mathf.Deg2Rad);
+            moveForce += Vector2.up * Mathf.Abs(moveDir.x) * movePower * Mathf.Sin(2*slopeAngles * Mathf.Deg2Rad);
         }
 
         if (Mathf.Abs(rigid.velocity.x) < maxXSpeed)
@@ -107,8 +107,9 @@ public class PlayerController : MonoBehaviour, IDamagable
         if (hit.collider != null)
         {
             float angle = Vector2.Angle(hit.normal, Vector2.up);
-            if (angle > 0 && angle <= 45  ) // 경사면 감지
+            if (angle > 0 && angle < 45  ) // 경사면 감지
             {
+                Debug.Log("Check22");
                 return true;
             }
         }

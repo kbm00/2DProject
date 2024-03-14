@@ -32,7 +32,7 @@ public class SkellDog : Monster
 
             case SkellDState.Trace:
                 SkellDTraceState();
-                break;
+                break;          
         }
     }
 
@@ -60,5 +60,7 @@ public class SkellDog : Monster
 
         }
     }
+
+   
 
 }
