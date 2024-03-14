@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour, IDamagable
 {
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     [SerializeField] Transform tf;
     [SerializeField] PhysicsMaterial2D lowMaterial;
     [SerializeField] PhysicsMaterial2D highMaterial;
+    [SerializeField] Slider healthSlider;
 
     [Header("PlayerState")]
     [SerializeField] float movePower;
@@ -25,7 +27,8 @@ public class PlayerController : MonoBehaviour, IDamagable
     [SerializeField] float jumpSpeed;
     [SerializeField] float dashSpeed;
     [SerializeField] float dashTime;
-    [SerializeField] int hp;
+    [SerializeField] float currentHealth;
+    [SerializeField] float maxHealth;
 
 
     [Header("Check")]
@@ -45,13 +48,14 @@ public class PlayerController : MonoBehaviour, IDamagable
     }
     void Start()
     {
+        currentHealth = maxHealth;
         tf = transform;
           
     }
 
     void Update()
-    {
-        
+    {       
+        UpdateHealthBar();
     }
 
     private void Move()
@@ -103,7 +107,7 @@ public class PlayerController : MonoBehaviour, IDamagable
         if (hit.collider != null)
         {
             float angle = Vector2.Angle(hit.normal, Vector2.up);
-            if (angle > 0 && angle <= 50  ) // 경사면 감지
+            if (angle > 0 && angle <= 45  ) // 경사면 감지
             {
                 return true;
             }
@@ -220,18 +224,24 @@ public class PlayerController : MonoBehaviour, IDamagable
             animator.SetBool("IsGround", isGround);
         }
     }
-    public void Die()
-    {
-        gameObject.SetActive(false);
+
+    private void UpdateHealthBar()
+    {       
+        healthSlider.value = currentHealth / maxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
-        hp -= damage;
-        if (hp <= 0)
+        currentHealth -= damage;
+        currentHealth = Mathf.Max(currentHealth, 0);
+        if (currentHealth == 0)
         {
             Die();
         }
     }
-
+    public void Die()
+    {
+        gameObject.SetActive(false);
+    }
+ 
 }

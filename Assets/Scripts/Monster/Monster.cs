@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour, IDamagable
 {
-    public int health;
+    public float health;
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
 
