@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[Serializable]
-public class Dialogue
+[CreateAssetMenu(fileName = "New Dialogue", menuName = "Dialogue")]
+public class Dialogue : ScriptableObject
 {
-    public string name;
+    public new string name;
     public string[] sentences;
 }

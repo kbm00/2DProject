@@ -15,7 +15,7 @@ public class Interaction : MonoBehaviour
 
             if(hit.collider !=null)
             {
-                Dialogue dialogue = hit.collider.GetComponent<Dialogue>();
+                Dialogue dialogue = hit.collider.GetComponent<NPC>().dialogue;
                 if(dialogue != null) 
                 {
                     dialoguePlay.StartDialogue(dialogue);
@@ -24,3 +24,4 @@ public class Interaction : MonoBehaviour
         }
     }
 }
+
