@@ -37,7 +37,6 @@ public class SceneManager : Singleton<SceneManager>
     IEnumerator LoadingRoutine(string sceneName)
     {
         yield return FadeOut();
-
         Manager.Pool.ClearPool();
         Manager.Sound.StopSFX();
         Manager.UI.ClearPopUpUI();
@@ -55,7 +54,7 @@ public class SceneManager : Singleton<SceneManager>
         }
 
         Manager.UI.EnsureEventSystem();
-
+        
         BaseScene curScene = GetCurScene();
         yield return curScene.LoadingRoutine();
 
