@@ -9,7 +9,6 @@ public class GameScene : BaseScene
         yield return null;
     }
 
- 
     public void Dungeon()
     {
         Manager.Scene.LoadScene("DungeonScene");
